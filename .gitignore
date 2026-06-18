@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+ENV/local/
+ENV/local/
+
+# Large CERT datasets
+data/
+*.tar.gz
+*.tar.bz2
+*.zip
+*.csv
+*.json
+!web_app/src/cyber_dna_data.json # Keep the pre-packaged dashboard data
+
+# Node dependencies
+node_modules/
+web_app/node_modules/
+.npm/
+
+# Local configuration and logs
+.env
+*.log
+.gemini/
+.agents/
+.git/
+.vscode/
+.idea/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
