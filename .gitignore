@@ -40,8 +40,10 @@ data/
 *.tar.bz2
 *.zip
 *.csv
-*.json
-!web_app/src/cyber_dna_data.json # Keep the pre-packaged dashboard data
+# Exclude all JSON except the pre-packaged dashboard data file
+!web_app/src/cyber_dna_data.json
+web_app/src/*.json
+!web_app/src/cyber_dna_data.json
 
 # Node dependencies
 node_modules/
