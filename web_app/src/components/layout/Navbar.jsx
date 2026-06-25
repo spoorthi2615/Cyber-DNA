@@ -1,7 +1,7 @@
 import React from 'react';
 import { Hexagon } from 'lucide-react';
 
-export default function Navbar({ finalF1 }) {
+export default function Navbar({ finalF1, baselineF1, finalPrecision, finalRecall, rawMaliciousCount, trainWeeks, testWeeks }) {
   return (
     <nav className="border-b border-slate-800 bg-[#0a0f1a]/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
@@ -35,8 +35,28 @@ export default function Navbar({ finalF1 }) {
           </div>
           <div className="h-6 w-px bg-slate-800"></div>
           <div className="flex flex-col items-end">
-            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Final F1</span>
-            <span className="text-sm text-[#10b981] font-mono font-bold">{(finalF1 * 100).toFixed(2)}%</span>
+            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Raw Malicious Users</span>
+            <span className="text-sm text-[#f59e0b] font-mono font-bold">{rawMaliciousCount}</span>
+          </div>
+          <div className="h-6 w-px bg-slate-800"></div>
+          <div className="flex flex-col items-end">
+            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Train / Test Weeks</span>
+            <span className="text-sm text-slate-300 font-mono">{trainWeeks} / {testWeeks}</span>
+          </div>
+          <div className="h-6 w-px bg-slate-800"></div>
+          <div className="flex flex-col items-end">
+            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Baseline F1</span>
+            <span className="text-sm text-[#0ea5e9] font-mono font-bold">{(baselineF1 * 100).toFixed(2)}%</span>
+          </div>
+          <div className="h-6 w-px bg-slate-800"></div>
+          <div className="flex flex-col items-end">
+            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Precision</span>
+            <span className="text-sm text-[#10b981] font-mono font-bold">{(finalPrecision * 100).toFixed(2)}%</span>
+          </div>
+          <div className="h-6 w-px bg-slate-800"></div>
+          <div className="flex flex-col items-end">
+            <span className="text-[0.65rem] text-slate-500 font-bold uppercase tracking-wider">Recall</span>
+            <span className="text-sm text-[#ef4444] font-mono font-bold">{(finalRecall * 100).toFixed(2)}%</span>
           </div>
         </div>
       </div>
