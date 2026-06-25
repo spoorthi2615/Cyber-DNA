@@ -1,0 +1,432 @@
+{
+  "temporal_drift": [
+    {
+      "week": "W1",
+      "benign_bds": 0.0,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W2",
+      "benign_bds": 2.7038927323448907,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W3",
+      "benign_bds": 2.8521115863348725,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W4",
+      "benign_bds": 2.68723070103217,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W5",
+      "benign_bds": 2.935337167389798,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W6",
+      "benign_bds": 2.9738041344279615,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W7",
+      "benign_bds": 2.9994682963765507,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W8",
+      "benign_bds": 2.5964193709306214,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W9",
+      "benign_bds": 2.740739610677886,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W10",
+      "benign_bds": 2.8390808324614056,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W11",
+      "benign_bds": 2.9127847573559036,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W12",
+      "benign_bds": 3.00691682422258,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W13",
+      "benign_bds": 3.6092019257960724,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W14",
+      "benign_bds": 2.8756853255094446,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W15",
+      "benign_bds": 2.8445755833051107,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W16",
+      "benign_bds": 2.8036185402211715,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W17",
+      "benign_bds": 2.8572930585802823,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W18",
+      "benign_bds": 2.760334093413133,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W19",
+      "benign_bds": 2.9931018729118857,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W20",
+      "benign_bds": 2.798429435385512,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W21",
+      "benign_bds": 2.7229888434371055,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W22",
+      "benign_bds": 3.6233536514531552,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W23",
+      "benign_bds": 2.9383385004853095,
+      "malicious_bds": 13.929617330655109
+    },
+    {
+      "week": "W24",
+      "benign_bds": 2.734924850867038,
+      "malicious_bds": 13.50340642063806
+    },
+    {
+      "week": "W25",
+      "benign_bds": 3.0391913236280543,
+      "malicious_bds": 4.119321740602514
+    },
+    {
+      "week": "W26",
+      "benign_bds": 2.770111585347182,
+      "malicious_bds": 5.585284912672205
+    },
+    {
+      "week": "W27",
+      "benign_bds": 3.780239677485765,
+      "malicious_bds": 7.131056308156729
+    },
+    {
+      "week": "W28",
+      "benign_bds": 3.0457237983963927,
+      "malicious_bds": 7.649447075795052
+    },
+    {
+      "week": "W29",
+      "benign_bds": 2.7222607895511075,
+      "malicious_bds": 7.131691137173846
+    },
+    {
+      "week": "W30",
+      "benign_bds": 2.764259195433071,
+      "malicious_bds": 9.923930625904314
+    },
+    {
+      "week": "W31",
+      "benign_bds": 2.6990966833789694,
+      "malicious_bds": 9.316174933330569
+    },
+    {
+      "week": "W32",
+      "benign_bds": 2.940805705798355,
+      "malicious_bds": 7.8837249529038
+    },
+    {
+      "week": "W33",
+      "benign_bds": 2.854687312902336,
+      "malicious_bds": 5.472938646826724
+    },
+    {
+      "week": "W34",
+      "benign_bds": 2.6731184411649003,
+      "malicious_bds": 7.820433688354927
+    },
+    {
+      "week": "W35",
+      "benign_bds": 2.819385099187682,
+      "malicious_bds": 7.811234518359017
+    },
+    {
+      "week": "W36",
+      "benign_bds": 3.5297434224023125,
+      "malicious_bds": 8.17600229814099
+    },
+    {
+      "week": "W37",
+      "benign_bds": 2.811886172886802,
+      "malicious_bds": 11.082286380247188
+    },
+    {
+      "week": "W38",
+      "benign_bds": 2.663985964288606,
+      "malicious_bds": 7.951921308612974
+    },
+    {
+      "week": "W39",
+      "benign_bds": 3.247842187031312,
+      "malicious_bds": 8.39903359268699
+    },
+    {
+      "week": "W40",
+      "benign_bds": 2.741055698707298,
+      "malicious_bds": 10.181655742169056
+    },
+    {
+      "week": "W41",
+      "benign_bds": 2.6104274560368435,
+      "malicious_bds": 10.037851139976599
+    },
+    {
+      "week": "W42",
+      "benign_bds": 2.9276079543716973,
+      "malicious_bds": 6.494837279922294
+    },
+    {
+      "week": "W43",
+      "benign_bds": 2.7777645382984164,
+      "malicious_bds": 7.3985314983358474
+    },
+    {
+      "week": "W44",
+      "benign_bds": 2.7073396410406705,
+      "malicious_bds": 9.342890072103609
+    },
+    {
+      "week": "W45",
+      "benign_bds": 2.8555165414271175,
+      "malicious_bds": 8.5146959226794
+    },
+    {
+      "week": "W46",
+      "benign_bds": 2.916913724772109,
+      "malicious_bds": 12.914123575802645
+    },
+    {
+      "week": "W47",
+      "benign_bds": 5.250278598523765,
+      "malicious_bds": 8.206326803139753
+    },
+    {
+      "week": "W48",
+      "benign_bds": 2.6140176144803764,
+      "malicious_bds": 9.57399223039337
+    },
+    {
+      "week": "W49",
+      "benign_bds": 2.8933166312724135,
+      "malicious_bds": 11.465849429711788
+    },
+    {
+      "week": "W50",
+      "benign_bds": 2.7206660672757397,
+      "malicious_bds": 7.002744143064595
+    },
+    {
+      "week": "W51",
+      "benign_bds": 5.3463628127149265,
+      "malicious_bds": 6.870212898893691
+    },
+    {
+      "week": "W52",
+      "benign_bds": 3.7593689271786155,
+      "malicious_bds": 7.736597853658507
+    },
+    {
+      "week": "W53",
+      "benign_bds": 3.144174913459406,
+      "malicious_bds": 6.954379280932986
+    },
+    {
+      "week": "W54",
+      "benign_bds": 2.828506559554474,
+      "malicious_bds": 4.0702313740273555
+    },
+    {
+      "week": "W55",
+      "benign_bds": 2.7416691531972215,
+      "malicious_bds": 8.049715825026107
+    },
+    {
+      "week": "W56",
+      "benign_bds": 2.8032593125727687,
+      "malicious_bds": 7.924218715998856
+    },
+    {
+      "week": "W57",
+      "benign_bds": 3.0715000183057284,
+      "malicious_bds": 13.736298920156344
+    },
+    {
+      "week": "W58",
+      "benign_bds": 2.7577349605645503,
+      "malicious_bds": 9.444672306227707
+    },
+    {
+      "week": "W59",
+      "benign_bds": 2.69973378318708,
+      "malicious_bds": 7.152443943187319
+    },
+    {
+      "week": "W60",
+      "benign_bds": 2.660019849356412,
+      "malicious_bds": 6.8189160415410965
+    },
+    {
+      "week": "W61",
+      "benign_bds": 2.7949568031477954,
+      "malicious_bds": 13.120174390714217
+    },
+    {
+      "week": "W62",
+      "benign_bds": 2.697832543139437,
+      "malicious_bds": 11.043021386530457
+    },
+    {
+      "week": "W63",
+      "benign_bds": 2.680472277146555,
+      "malicious_bds": 8.175995858571593
+    },
+    {
+      "week": "W64",
+      "benign_bds": 2.647245741965984,
+      "malicious_bds": 16.858274682677582
+    },
+    {
+      "week": "W65",
+      "benign_bds": 2.661868269012941,
+      "malicious_bds": 7.5442133068423365
+    },
+    {
+      "week": "W66",
+      "benign_bds": 2.935700964866059,
+      "malicious_bds": 14.39503725723884
+    },
+    {
+      "week": "W67",
+      "benign_bds": 2.817851013361753,
+      "malicious_bds": 19.07893806735002
+    },
+    {
+      "week": "W68",
+      "benign_bds": 3.526387951512339,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W69",
+      "benign_bds": 2.6567266078136402,
+      "malicious_bds": 17.836459815107773
+    },
+    {
+      "week": "W70",
+      "benign_bds": 2.626690243264055,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W71",
+      "benign_bds": 2.733319862407252,
+      "malicious_bds": 0.0
+    },
+    {
+      "week": "W72",
+      "benign_bds": 10.136813116504959,
+      "malicious_bds": 0.0
+    }
+  ],
+  "bsi_distribution": [
+    {
+      "range": "0.00-0.10",
+      "benign_benign": 363,
+      "benign_malicious": 111,
+      "malicious_malicious": 0
+    },
+    {
+      "range": "0.10-0.20",
+      "benign_benign": 23678,
+      "benign_malicious": 1592,
+      "malicious_malicious": 105
+    },
+    {
+      "range": "0.20-0.30",
+      "benign_benign": 5601,
+      "benign_malicious": 2565,
+      "malicious_malicious": 103
+    },
+    {
+      "range": "0.30-0.40",
+      "benign_benign": 12535,
+      "benign_malicious": 3161,
+      "malicious_malicious": 135
+    },
+    {
+      "range": "0.40-0.50",
+      "benign_benign": 21058,
+      "benign_malicious": 7624,
+      "malicious_malicious": 244
+    },
+    {
+      "range": "0.50-0.60",
+      "benign_benign": 29557,
+      "benign_malicious": 14834,
+      "malicious_malicious": 522
+    },
+    {
+      "range": "0.60-0.70",
+      "benign_benign": 40648,
+      "benign_malicious": 7816,
+      "malicious_malicious": 359
+    },
+    {
+      "range": "0.70-0.80",
+      "benign_benign": 55355,
+      "benign_malicious": 5212,
+      "malicious_malicious": 130
+    },
+    {
+      "range": "0.80-0.90",
+      "benign_benign": 95262,
+      "benign_malicious": 9647,
+      "malicious_malicious": 238
+    },
+    {
+      "range": "0.90-1.00",
+      "benign_benign": 147928,
+      "benign_malicious": 12538,
+      "malicious_malicious": 579
+    }
+  ],
+  "metadata": {
+    "bsi_vector_basis": "mean training-period DBS per user",
+    "bsi_similarity": "cosine similarity",
+    "temporal_drift_definition": "weekly cohort mean BDS",
+    "source": "computed from CERT r4.2 Phase 11 feature pipeline"
+  }
+}

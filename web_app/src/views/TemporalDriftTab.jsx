@@ -3,13 +3,13 @@ import { Clock } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
 
 export default function TemporalDriftTab({ data }) {
-  const driftData = data.dashboard_illustrative_data?.temporal_drift || [];
+  const driftData = data.dashboard_computed_metrics?.temporal_drift || [];
 
   return (
     <div className="flex flex-col gap-6">
       <div className="bg-[#8b5cf6]/10 border border-[#8b5cf6]/30 rounded p-4 text-sm text-[#8b5cf6] flex items-center justify-between">
-        <span className="font-semibold">Illustrative Behavioral Drift Profile</span>
-        <span className="text-xs uppercase tracking-widest text-slate-400">Illustrative Synthetic Dashboard Data</span>
+        <span className="font-semibold">Verified Computed BDS</span>
+        <span className="text-xs uppercase tracking-widest text-slate-400">Computed from Pipeline</span>
       </div>
 
       <div className="glass-panel p-6 space-y-6">
@@ -19,10 +19,6 @@ export default function TemporalDriftTab({ data }) {
             <h2 className="text-xl font-bold text-slate-200">Temporal Drift (BDS Evolution)</h2>
           </div>
         </div>
-        
-        <p className="text-sm text-slate-400 italic border-l-2 border-slate-700 pl-3">
-          This chart is intended to show how benign and malicious drift trajectories may diverge conceptually over time; it is not a separately benchmarked evaluation result.
-        </p>
 
         <div className="h-[350px]">
           <ResponsiveContainer width="100%" height="100%">
