@@ -145,14 +145,28 @@ def compute_metrics():
     if "dashboard_illustrative_data" in data:
         del data["dashboard_illustrative_data"]
         
+    # Compute pair count summary for metadata
+    bb_total = sum(b['benign_benign'] for b in bsi_distribution)
+    bm_total = sum(b['benign_malicious'] for b in bsi_distribution)
+    mm_total = sum(b['malicious_malicious'] for b in bsi_distribution)
+    n_users = int((1 + (1 + 8*(bb_total+bm_total+mm_total))**0.5) / 2)
+    n_malicious = int((1 + (1 + 8*mm_total)**0.5) / 2)
+    n_benign = n_users - n_malicious
+
     data["dashboard_computed_metrics"] = {
         "temporal_drift": temporal_drift,
         "bsi_distribution": bsi_distribution,
         "metadata": {
-            "bsi_vector_basis": "mean training-period DBS per user",
-            "bsi_similarity": "cosine similarity",
-            "temporal_drift_definition": "weekly cohort mean BDS",
-            "source": "computed from CERT r4.2 Phase 11 feature pipeline"
+            "bsi_vector_basis": "mean training-period DBS per user (Weeks 1-52)",
+            "bsi_similarity": "cosine similarity (scipy pdist, metric='cosine')",
+            "temporal_drift_definition": "weekly cohort mean BDS (euclidean distance from user baseline vector)",
+            "temporal_drift_note": "malicious_bds=0.0 indicates no ground-truth malicious user-weeks existed in that week, NOT that malicious drift was literally zero",
+            "bsi_user_counts": {"total": n_users, "benign": n_benign, "malicious": n_malicious},
+            "bsi_pair_counts": {"benign_benign": bb_total, "benign_malicious": bm_total, "malicious_malicious": mm_total, "grand_total": bb_total+bm_total+mm_total},
+            "bsi_pair_math_check": f"N={n_users}, M={n_malicious}, B={n_benign}. B*M={n_benign*n_malicious} benign-malicious pairs expected, {bm_total} computed.",
+            "source_script": "src/export_dashboard_metrics.py",
+            "source_data": "CERT r4.2 Phase 11 feature pipeline (cyber_dna_phase11_ablation.py)",
+            "feature_dimensions": 25
         }
     }
     
