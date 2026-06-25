@@ -14,7 +14,7 @@ export default function CyberAnthropologyTab({ data }) {
     <div className="flex flex-col gap-6">
       {/* Disclaimer / Label for clarity */}
       <div className="bg-[#0ea5e9]/10 border border-[#0ea5e9]/30 rounded p-4 text-sm text-[#0ea5e9] flex items-center justify-between">
-        <span className="font-semibold">Verified Benchmark Findings</span>
+        <span className="font-semibold">Verified Benchmark Interpretation</span>
         <span className="text-xs uppercase tracking-widest text-slate-400">Cyber DNA Final Report</span>
       </div>
 
@@ -49,6 +49,9 @@ export default function CyberAnthropologyTab({ data }) {
         <h3 className="text-lg font-bold mb-4 text-slate-300">Anthropological Insights</h3>
         <p className="text-sm text-slate-400 leading-relaxed mb-4">
           The Phase 11 evaluation verified that benign users maintain high Identity Persistence (IDP) and Behavioral Continuity (BC). Conversely, malicious actors display a marked transition shock during active attack phases, significantly dropping their scores and distinguishing them from normal operations. Social Role Consistency (SRC) validates these environmental deviations.
+        </p>
+        <p className="text-sm text-slate-400 italic border-l-2 border-slate-700 pl-3">
+          Thresholds shown here are documented benchmark criteria from the Cyber Anthropology evaluation design and are used to interpret user stability patterns; they are not separate Phase 11 cohort-average outputs.
         </p>
       </div>
     </div>
