@@ -194,59 +194,59 @@
     },
     {
       "feature": "usb_event_count",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "response_time",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "email_freq",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "contact_diversity",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "reciprocity_ratio",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "vocab_diversity",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "after_hours_logon_ratio",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "after_hours_logon_count",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "unique_pc_count",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "weekend_logon_count",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "emails_sent_weekend",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "emails_sent_after_hours",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "IDP",
-      "importance": 0.0
+      "importance": 0
     },
     {
       "feature": "SRC",
-      "importance": 0.0
+      "importance": 0
     }
   ],
   "key_findings": [
@@ -277,5 +277,112 @@
     "precision_recall_tradeoff": "Full Phase 11 increased false positives relative to the baseline, but captured 10 additional malicious weeks and improved F1/AUPRC.",
     "weak_block": "Workstation diversity features were noisy in isolation.",
     "final_recommendation": "Freeze the project on the verified Full Phase 11 model for final presentation and report submission."
+  },
+  "dashboard_illustrative_data": {
+    "anthropology_summary": {
+      "idp": {
+        "label": "Identity Persistence (IDP)",
+        "benign_threshold": "≥ 0.90",
+        "malicious_threshold": "< 0.75"
+      },
+      "bc": {
+        "label": "Behavioral Continuity (BC)",
+        "benign_threshold": "≥ 0.90",
+        "malicious_threshold": "< 0.70"
+      },
+      "src": {
+        "label": "Social Role Consistency (SRC)",
+        "definition": "Monitors Role Isolation & Context"
+      }
+    },
+    "temporal_drift": [
+      {
+        "week": "W1",
+        "benign_bds": 0.12,
+        "malicious_bds": 0.12
+      },
+      {
+        "week": "W12",
+        "benign_bds": 0.13,
+        "malicious_bds": 0.15
+      },
+      {
+        "week": "W24",
+        "benign_bds": 0.14,
+        "malicious_bds": 0.28
+      },
+      {
+        "week": "W36",
+        "benign_bds": 0.15,
+        "malicious_bds": 0.45
+      },
+      {
+        "week": "W48",
+        "benign_bds": 0.14,
+        "malicious_bds": 0.65
+      },
+      {
+        "week": "W60",
+        "benign_bds": 0.16,
+        "malicious_bds": 0.82
+      },
+      {
+        "week": "W72",
+        "benign_bds": 0.15,
+        "malicious_bds": 0.88
+      }
+    ],
+    "bsi_distribution": [
+      {
+        "range": "0.00-0.10",
+        "benign_pairs": 500,
+        "malicious_pairs": 0
+      },
+      {
+        "range": "0.10-0.20",
+        "benign_pairs": 1200,
+        "malicious_pairs": 0
+      },
+      {
+        "range": "0.20-0.30",
+        "benign_pairs": 2500,
+        "malicious_pairs": 0
+      },
+      {
+        "range": "0.30-0.40",
+        "benign_pairs": 3800,
+        "malicious_pairs": 2
+      },
+      {
+        "range": "0.40-0.50",
+        "benign_pairs": 1100,
+        "malicious_pairs": 5
+      },
+      {
+        "range": "0.50-0.60",
+        "benign_pairs": 400,
+        "malicious_pairs": 12
+      },
+      {
+        "range": "0.60-0.70",
+        "benign_pairs": 150,
+        "malicious_pairs": 25
+      },
+      {
+        "range": "0.70-0.80",
+        "benign_pairs": 50,
+        "malicious_pairs": 35
+      },
+      {
+        "range": "0.80-0.90",
+        "benign_pairs": 12,
+        "malicious_pairs": 42
+      },
+      {
+        "range": "0.90-1.00",
+        "benign_pairs": 3,
+        "malicious_pairs": 58
+      }
+    ]
   }
 }
