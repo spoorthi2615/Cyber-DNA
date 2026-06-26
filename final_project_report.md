@@ -379,4 +379,9 @@ The final validated performance metrics are backed by the following generated ev
 - `results/phase11_feature_inventory.csv`
 - `results/phase11_run_summary.json`
 - `results/phase11_findings.md`
-- React visualization dashboard linked to `cyber_dna_data.json`
+- `src/export_dashboard_metrics.py` (Downstream metrics exporter)
+- `results/dashboard_temporal_drift.csv` (Computed temporal concept drift curves)
+- `results/dashboard_bsi_distribution.csv` (Computed pairwise user similarity counts)
+- `results/dashboard_metrics_summary.json` (Traceable dashboard metadata with explicit cohort pair-count validation)
+- React visualization dashboard linked to `web_app/src/cyber_dna_data.json`
+
