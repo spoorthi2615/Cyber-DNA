@@ -36,26 +36,26 @@ To ensure that the framework's evaluation is academically rigorous and robust to
 
 ### A. Unit Hypercube Normalization
 Features are normalized to a uniform scale of $[0, 1]$ using training min-max bounds to prevent scale inflation:
-\[ \bar{f}_i = \text{clip}\left(\frac{f_i - \min_{\text{train}}}{\max_{\text{train}} - \min_{\text{train}}}, 0, 1\right) \]
+$$ \bar{f}_i = \text{clip}\left(\frac{f_i - \min_{\text{train}}}{\max_{\text{train}} - \min_{\text{train}}}, 0, 1\right) $$
 
 The normalized features are concatenated into a $D$-dimensional vector representing a user's behavior for a given week:
-\[ \mathbf{DBS}_{u,t} = [\bar{f}_{1}, \bar{f}_{2}, \dots, \bar{f}_{D}]^T \in [0, 1]^D \]
+$$ \mathbf{DBS}_{u,t} = [\bar{f}_{1}, \bar{f}_{2}, \dots, \bar{f}_{D}]^T \in [0, 1]^D $$
 
 ### B. Behavioral Drift Score (BDS)
 Quantifies the Euclidean distance between a user's current signature and their historical baseline reference signature established during their first active week ($T_{\text{base}}$):
-\[ BDS(u, t) = \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,T_{\text{base}}}\|_2 \]
+$$ BDS(u, t) = \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,T_{\text{base}}}\|_2 $$
 
 ### C. Digital Identity Persistence (IDP)
 Measures the behavioral stability of a user across consecutive weeks:
-\[ \text{IDP}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,t-1}\|_2 \]
+$$ \text{IDP}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,t-1}\|_2 $$
 
 ### D. Behavioral Continuity (BC)
 Measures the smoothness of behavioral evolution, defined as the complement of the variance of weekly drift scores:
-\[ \text{BC}_u = 1 - \text{Var}\left(\text{BDS}_{u,2}, \text{BDS}_{u,3}, \dots, \text{BDS}_{u,T}\right) \]
+$$ \text{BC}_u = 1 - \text{Var}\left(\text{BDS}_{u,2}, \text{BDS}_{u,3}, \dots, \text{BDS}_{u,T}\right) $$
 
 ### E. Social Role Consistency (SRC)
 Tracks the stability of a user's communication footprints by evaluating the similarity of email subvectors $\mathbf{S}_{u,t}$ over time:
-\[ \text{SRC}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{S}_{u,t} - \mathbf{S}_{u,t-1}\|_2 \]
+$$ \text{SRC}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{S}_{u,t} - \mathbf{S}_{u,t-1}\|_2 $$
 
 ---
 
