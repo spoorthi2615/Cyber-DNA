@@ -1,0 +1,216 @@
+% Version 3.1 December 2024
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+
+%%%% Standard Packages
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[title]{appendix}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{url}
+%%%%
+
+\theoremstyle{thmstyleone}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{thmstyletwo}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\theoremstyle{thmstylethree}
+\newtheorem{definition}{Definition}
+
+\raggedbottom
+
+\begin{document}
+
+\title[Continuous Behavioral Authentication]{Continuous Behavioral Authentication and Insider Threat Detection via Chronological Digital Behavioral Signatures}
+
+\author*[1]{\fnm{Spoorthi} \sur{Yadav}}\email{spoorthipyadav@gmail.com}
+
+\affil*[1]{\orgdiv{Department of Computer Science}, \orgname{Cybersecurity Research Group}, \orgaddress{\city{Hyderabad}, \state{Telangana}, \country{India}}}
+
+\abstract{Traditional perimeter-based enterprise authentication mechanisms verify user identities solely at the point of entry and fail to validate active sessions continuously. Consequently, organizations remain vulnerable to insider misuse, credential theft, and compromised authenticated sessions. This paper presents Cyber DNA, a continuous behavioral authentication and insider-threat detection framework that models user behavior longitudinally through weekly Digital Behavioral Signatures (DBS) derived from logon records, email traffic, and removable media activity. Cyber DNA augments raw activity signals with concept-drift and behavioral-consistency descriptors, specifically the Behavioral Drift Score (BDS), Digital Identity Persistence (IDP), Behavioral Continuity (BC), and Social Role Consistency (SRC). We evaluate the framework on the Carnegie Mellon University (CMU) Computer Emergency Response Team (CERT) Insider Threat Dataset r4.2 using a strict, leakage-free chronological protocol (training on Weeks 1--52 and testing on unseen Weeks 53--72). Our verified baseline model utilizing 16 features yields an F1-score of 44.44\%, a precision of 63.64\%, a recall of 34.15\%, and an AUPRC of 0.4059 under a threshold of 0.50. Expanding the signature vector to 29 features by incorporating workstation-diversity history, off-hours logons, and device event aggregates improves detection to 48.41\% F1-score, 50.67\% precision, 46.34\% recall, and 0.4490 AUPRC under a tuned threshold of 0.30, capturing 10 additional malicious weeks on the out-of-sample test partition. The findings demonstrate that combining longitudinal drift profiles with temporal and device-aware features significantly enhances out-of-sample insider threat detection under realistic, leakage-free evaluation settings.}
+
+\keywords{Continuous Authentication, Insider Threat Detection, Behavioral Biometrics, Concept Drift, XGBoost, CMU CERT r4.2}
+
+\maketitle
+
+\section{Introduction}\label{sec1}
+Modern enterprise security structures rely heavily on perimeter-focused authentication mechanisms, such as passwords, multi-factor authentication (MFA), and single sign-on (SSO). While these mechanisms provide essential barriers at session initialization, they operate under a binary, point-in-time paradigm. Once a session is established, the identity of the actor is assumed to remain constant, leaving a critical security gap. Compromised credentials, active session hijacking, or malicious insider activities occurring during authorized sessions can bypass these defenses entirely. Continuous behavioral authentication has emerged as a solution, attempting to establish ongoing verification by profiling post-authentication user activities.
+
+Traditional approaches to user profiling rely heavily on technical identifiers, such as IP addresses, MAC addresses, and specific host names. However, these technical tags can be easily altered, spoofed, or masked. In contrast, human behavioral traits---such as specific working hours, file transfer frequencies, and communication networks---exhibit a higher degree of longitudinal persistence and are far more difficult for adversaries to mimic. Consequently, modeling these traits allows for the construction of a unique behavioral identity, referred to here as a Digital Behavioral Signature (DBS).
+
+A primary challenge in long-term behavioral authentication is concept drift \cite{gama2014survey}. Normal human behavior naturally changes over time due to shifts in organizational roles, team re-organizations, holiday schedules, and evolving workloads. Static anomaly detection models tend to interpret these benign shifts as malicious events, leading to elevated false-positive rates that overwhelm Security Operations Center (SOC) analysts. To address this, authentication systems must explicitly model behavioral drift and consistency over time.
+
+Furthermore, academic research in insider-threat detection frequently suffers from evaluation design flaws, particularly temporal data leakage. Many studies use random cross-validation or split datasets randomly across time, allowing future behavioral profiles or labels to contaminate the training phase. Such protocols produce inflated, unrealistic performance metrics that degrade immediately when deployed in production settings.
+
+This work presents Cyber DNA, a continuous behavioral authentication and insider-threat detection framework evaluated under a strict, leakage-free chronological protocol on the CMU CERT r4.2 dataset \cite{cert2020dataset}. The main contributions of this work are:
+\begin{itemize}
+    \item \textbf{Framework Design}: We present the Cyber DNA framework, which structures raw enterprise activity logs (logon, email, and USB events) into weekly Digital Behavioral Signatures (DBS) to profile longitudinal user activities.
+    \item \textbf{Longitudinal Modeling}: We introduce mathematical descriptors of behavioral drift and consistency---namely the Behavioral Drift Score (BDS), Identity Persistence (IDP), Behavioral Continuity (BC), and Social Role Consistency (SRC)---to represent user behavior dynamically over time.
+    \item \textbf{Leakage-Free Protocol}: We implement a rigorous chronological evaluation protocol, training models on Weeks 1--52 and testing on Weeks 53--72, ensuring all normalization parameters and decision thresholds are tuned strictly on the training partition.
+    \item \textbf{Feature Expansion and Ablation}: We conduct a step-by-step feature ablation study, comparing a 16-feature baseline model to an expanded 29-feature configuration incorporating USB, off-hours, and workstation-diversity history.
+    \item \textbf{Performance Optimization}: The expanded model achieves a final F1-score of 48.41\%, a recall of 46.34\%, and an AUPRC of 0.4490, successfully detecting 10 additional out-of-sample malicious weeks compared to the baseline.
+\end{itemize}
+
+\section{Related Work}\label{sec2}
+Insider threat detection on enterprise datasets typically falls into supervised, semi-supervised, or unsupervised categories. Unsupervised techniques, such as graph-based anomaly detection \cite{eberle2009anomaly} and deep neural network models \cite{tuor2017deep}, attempt to flag activities that deviate from a global or group baseline. While attractive due to the absence of label requirements, unsupervised models frequently suffer from high false-positive rates in practice, as benign behavioral deviations are common.
+
+Supervised classification methods, particularly gradient-boosted trees and ensembles, demonstrate superior discrimination when representative labels are available. However, class imbalance is a persistent issue, as malicious actions constitute a tiny fraction of normal enterprise activity. Researchers must utilize specialized metrics such as Area Under the Precision-Recall Curve (AUPRC) rather than traditional ROC curves or accuracy, as AUPRC provides a more realistic measure of performance in highly imbalanced domains \cite{lindauer2014generating}.
+
+Commercial User and Entity Behavior Analytics (UEBA) systems commonly aggregate events to compute heuristic risk scores \cite{homoliak2019insight}. However, these scoring rules are often opaque, hardcoded, and struggle to accommodate concept drift. Active behavioral biometrics, such as keystroke dynamics and mouse telemetry \cite{alsulami2018biometric, broderick2013active}, offer high resolution but require intrusive endpoint monitoring agents. Cyber DNA operates on structured, lightweight system event logs, making it scalable across large organizations without requiring fine-grained endpoint telemetry.
+
+\section{Cyber DNA Framework and Feature Construction}\label{sec3}
+The Cyber DNA pipeline aggregates raw enterprise logs into weekly interval summaries to build Digital Behavioral Signatures. It then evaluates these signatures chronologically using gradient-boosted trees.
+
+\subsection{Behavioral Feature Construction}\label{subsec3_1}
+We process raw events from logon, email, and USB logs. Activity is aggregated per user per week to construct a feature vector. To prevent temporal leakage, historical features (e.g., whether a machine is new to a user) are computed strictly from historical indices prior to the target week. 
+
+Raw features $f_i$ are normalized to the unit hypercube using bounds computed solely from the training partition:
+\begin{equation}
+\bar{f}_i = \max\left(0, \min\left(1, \frac{f_i - \min_{\text{train}}}{\max_{\text{train}} - \min_{\text{train}}}\right)\right)
+\label{eq:norm}
+\end{equation}
+The normalized features compose the weekly Digital Behavioral Signature vector, $\mathbf{DBS}_{u,t} \in [0,1]^D$, for user $u$ at week $t$.
+
+\subsection{Temporal and Consistency Metrics}\label{subsec3_2}
+To capture longitudinal behavioral trends, we compute four high-level temporal metrics:
+\begin{definition}[Behavioral Drift Score]
+The Behavioral Drift Score (BDS) measures the Euclidean distance between a user's current weekly signature and their baseline signature established in their first week of activity, $T_{\text{base}}$:
+\begin{equation}
+\text{BDS}(u, t) = \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,T_{\text{base}}}\|_2
+\end{equation}
+\end{definition}
+
+\begin{definition}[Identity Persistence]
+Identity Persistence (IDP) measures behavioral stability across consecutive weeks:
+\begin{equation}
+\text{IDP}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{DBS}_{u,t} - \mathbf{DBS}_{u,t-1}\|_2
+\end{equation}
+\end{definition}
+
+\begin{definition}[Behavioral Continuity]
+Behavioral Continuity (BC) measures the smoothness of behavioral evolution, defined as the complement of the variance of consecutive weekly drift values:
+\begin{equation}
+\text{BC}_u = 1 - \text{Var}\left(\text{BDS}_{u,2}, \text{BDS}_{u,3}, \dots, \text{BDS}_{u,T}\right)
+\end{equation}
+\end{definition}
+
+\begin{definition}[Social Role Consistency]
+Social Role Consistency (SRC) evaluates communication style stability by monitoring the subvector of email features, $\mathbf{S}_{u,t}$:
+\begin{equation}
+\text{SRC}_u = 1 - \frac{1}{T-1} \sum_{t=2}^{T} \|\mathbf{S}_{u,t} - \mathbf{S}_{u,t-1}\|_2
+\end{equation}
+\end{definition}
+
+\section{Experimental Design and Evaluation Protocol}\label{sec4}
+We evaluate Cyber DNA on the CMU CERT r4.2 dataset \cite{cert2020dataset}, consisting of 1,000 users over 1.5 years (70 malicious, 930 benign). The data is partitioned chronologically to mimic a real-world deployment:
+\begin{itemize}
+    \item \textbf{Training Partition (Weeks 1--52)}: Contains 49,867 user-weeks, including 240 malicious weeks. Min-max bounds and classification thresholds are optimized solely on this set.
+    \item \textbf{Testing Partition (Weeks 53--72)}: Contains 17,300 user-weeks, including 82 malicious weeks. This set represents unseen future data.
+\end{itemize}
+
+XGBoost \cite{chen2016xgboost} is selected as the primary classifier due to its capacity for non-linear feature interactions and robustness to extreme class imbalance (the malicious class comprises only 0.48\% of the user-weeks). We adjust for imbalance using the `scale\_pos\_weight` parameter. The classification threshold is optimized via stratified 5-fold cross-validation on the training set to maximize the out-of-fold F1-score, and then frozen for testing.
+
+\section{Results and Ablation Study}\label{sec5}
+We compare the baseline 16-feature model against configurations incorporating USB events, workstation-diversity history, off-hours logons, and email-intensity features. The step-by-step performance metrics are detailed in Table~\ref{tab:ablation}.
+
+\begin{table}[h]
+\caption{Feature ablation and threshold tuning results on the out-of-sample test partition (Weeks 53--72).}\label{tab:ablation}
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lcccccc}
+\toprule
+Configuration & Features & Threshold & Precision & Recall & F1-Score & AUPRC \\
+\midrule
+\textbf{Verified Baseline} & 16 & 0.50 & 63.64\% & 34.15\% & 44.44\% & 0.4059 \\
+\textbf{Baseline + USB} & 20 & 0.50 & 65.85\% & 32.93\% & 43.90\% & 0.4168 \\
+\textbf{Baseline + Workstation Div.} & 19 & 0.65 & 58.33\% & 25.61\% & 35.59\% & 0.3578 \\
+\textbf{Baseline + Off-Hours} & 20 & 0.55 & 66.67\% & 31.71\% & 42.98\% & 0.4151 \\
+\textbf{Expanded Cyber DNA Model} & 29 & 0.30 & 50.67\% & 46.34\% & 48.41\% & 0.4490 \\
+\botrule
+\end{tabular*}
+\end{table}
+
+The Baseline model yields a precision of 63.64\% and a recall of 34.15\% (28 TP, 16 FP, 54 FN). The Expanded Cyber DNA Model, which leverages 29 features and a tuned threshold of 0.30, increases the recall by 35.7\% relative (46.34\%; 38 TP, 37 FP, 44 FN), yielding a final F1-score of 48.41\% (+8.9\% relative improvement) and an AUPRC of 0.4490 (+10.6\% relative improvement). The model successfully surfaces 10 additional out-of-sample malicious weeks.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{results/dashboard_temporal_drift.csv} % represented conceptually
+\caption{Digital Behavioral Signature concept drift over the 72-week cohort. The plot highlights the bifurcation of the mean BDS of the malicious cohort during active threat windows relative to the stable baseline of the benign cohort.}\label{fig:drift}
+\end{figure}
+
+The gain importances of the top 10 features in the final expanded model are provided in Table~\ref{tab:importance}.
+
+\begin{table}[h]
+\caption{XGBoost gain importance values for the top 10 features in the Expanded Cyber DNA model.}\label{tab:importance}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Feature & Gain Importance \\
+\midrule
+`weekend\_activity` & 0.2988 \\
+`usb\_transfers` & 0.1689 \\
+`usb\_after\_hours\_count` & 0.1073 \\
+`login\_freq` & 0.1039 \\
+`usb\_active\_days` & 0.0620 \\
+`after\_hours\_logins` & 0.0477 \\
+`new\_pc\_count` & 0.0319 \\
+`BDS` & 0.0307 \\
+`weekend\_logon\_ratio` & 0.0270 \\
+`BC` & 0.0254 \\
+\botrule
+\end{tabular}
+\end{table}
+
+\section{Discussion and Operational Implications}\label{sec6}
+The ablation results demonstrate that temporal signatures (e.g., weekend activity and off-hours behavior) and device metrics (e.g., USB transfers and device active days) represent the primary discriminative signals. In isolation, individual features such as workstation diversity or raw email metadata introduce noise, which degrades out-of-sample precision. However, when combined under a recall-optimized decision boundary (threshold of 0.30), the features act synergistically to recover threats that bypass standard baselines.
+
+From a Security Operations Center (SOC) perspective, shifting the threshold to 0.30 represents a strategic choice. While it increases the false-positive volume from 16 to 37, it reduces false negatives from 54 to 44. In high-stakes enterprise environments, this trade-off is often acceptable, as the cost of a missed insider threat is significantly higher than that of triaging additional alerts.
+
+\section{Limitations and Threats to Validity}\label{sec7}
+A key methodological limitation is our reliance on the CMU CERT r4.2 dataset, which utilizes simulated insider threat profiles embedded in synthetic enterprise logs. While widely accepted as an academic benchmark, real-world organizations exhibit more complex, unstructured behavioral shifts. Furthermore, weekly aggregation, while robust to daily sparse logs, is insensitive to rapid, sub-daily malicious bursts (e.g., rapid file exfiltration occurring over a few minutes). Finally, several high-level consistency metrics, such as IDP and SRC, exhibited low individual feature importance, suggesting they are best interpreted as auxiliary features rather than primary detection signals.
+
+\section{Future Work}\label{sec8}
+Future work will focus on integrating HTTP proxy logs and file metadata to build semantic feature spaces that capture exfiltration intent. We also plan to evaluate the framework on graph-based communication networks and explore adaptive, daily sliding-window architectures to enable near-real-time alert generation.
+
+\section{Conclusion}\label{sec9}
+Continuous behavioral authentication addresses the security gaps left by static, entry-point logins. The Cyber DNA framework demonstrates that weekly Digital Behavioral Signatures combined with temporal drift modeling can effectively detect insider threat activity under a realistic, chronological protocol. By expanding the feature space to include off-hours logons, workstation-diversity history, and USB patterns, we improved the out-of-sample detection recall to 46.34\% and the F1-score to 48.41\%. This work highlights the critical importance of evaluating behavioral authentication systems under a strict chronological, leakage-free design to ensure model viability in real-world deployments.
+
+\backmatter
+
+\bmhead{Acknowledgements}
+The authors acknowledge Carnegie Mellon University's CERT Division for providing the Insider Threat Test Dataset r4.2.
+
+\section*{Declarations}
+\begin{itemize}
+    \item \textbf{Funding}: Not applicable.
+    \item \textbf{Conflict of interest}: The authors declare no conflict of interest.
+    \item \textbf{Ethics approval}: Not applicable.
+    \item \textbf{Data availability}: The CMU CERT r4.2 dataset is publicly accessible via the SEI repository.
+    \item \textbf{Code availability}: The implementation code, scripts, and React dashboard files are hosted at \url{https://github.com/spoorthi2615/Cyber-DNA}.
+\end{itemize}
+
+\bibliography{sn-bibliography}
+
+\end{document}
