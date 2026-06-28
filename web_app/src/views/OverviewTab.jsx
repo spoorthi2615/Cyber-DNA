@@ -8,7 +8,7 @@ export default function OverviewTab({ baseline, final }) {
       {/* Stat Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
-          icon={Users} title="Cohort Users" value="1,000" subtitle="Total synthetic employees" 
+          icon={Users} title="Cohort Users" value="1,000" subtitle="Profiled CERT employees" 
           iconColor="text-[#0ea5e9]" valueColor="text-slate-100" 
         />
         <StatCard 
