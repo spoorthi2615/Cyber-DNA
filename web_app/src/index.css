@@ -1,165 +1,253 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
 
-@theme {
-  --color-cyber-bg: #030712;
-  --color-cyber-panel: #111827;
-  --color-cyber-border: #1f2937;
-  --color-neon-primary: #0ea5e9;
-  --color-neon-secondary: #8b5cf6;
-  --color-neon-success: #10b981;
-  --color-neon-warning: #f59e0b;
-  --color-neon-danger: #ef4444;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "Fira Code", "JetBrains Mono", monospace;
+:root {
+  --bg-primary: #080a0f;
+  --bg-secondary: #0f131a;
+  --bg-panel: rgba(15, 19, 26, 0.65);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --text-primary: #f1f5f9;
+  --text-secondary: #64748b;
+  --color-sky: #0ea5e9;
+  --color-indigo: #6366f1;
+  --color-red: #ef4444;
+  --color-yellow: #eab308;
+  --color-green: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: var(--color-cyber-bg);
-  color: #e2e8f0;
-  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.04), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.04), transparent 25%);
-  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Glassmorphism Panels */
-.glass-panel {
-  background-color: rgba(17, 24, 39, 0.6);
+/* Glassmorphism Panel Styling */
+.panel {
+  background: var(--bg-panel);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(31, 41, 55, 0.8);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* Panel Glow Effect on Hover */
-.glass-panel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.glass-panel:hover::before {
-  opacity: 1;
-}
-
-/* Typography & Neon */
-.heading-gradient {
-  background-clip: text;
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-sky), var(--color-indigo));
   -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #0ea5e9, #8b5cf6);
+  -webkit-text-fill-color: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
 }
 
-.text-glow-primary {
-  color: var(--color-neon-primary);
-  text-shadow: 0 0 12px rgba(14, 165, 233, 0.5);
-}
-.text-glow-success {
-  color: var(--color-neon-success);
-  text-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
-}
-
-/* Nav Tabs */
-.nav-tab {
-  padding: 0.75rem 1.5rem;
+/* Tab Navigation buttons */
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tab-btn.active {
+  color: var(--text-primary);
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+}
+
+/* Metric card */
+.card-stat {
+  background: rgba(15, 19, 26, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  flex: 1;
+}
+
+.card-title {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #64748b;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-bottom: 2px solid transparent;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+/* Anomaly feeds */
+.feed-box {
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease;
+}
+
+.feed-red {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-left: 3px solid var(--color-red);
+  color: #fca5a5;
+}
+
+.feed-yellow {
+  background: rgba(234, 179, 8, 0.05);
+  border: 1px solid rgba(234, 179, 8, 0.15);
+  border-left: 3px solid var(--color-yellow);
+  color: #fef08a;
+}
+
+/* Custom heatmaps */
+.heatmap-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.heatmap-hdr {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 4px;
+  text-align: center;
+}
+
+.heatmap-cell {
+  aspect-ratio: 1;
+  text-align: center;
+  font-weight: 700;
+  padding: 8px 4px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.08);
+  filter: brightness(1.25);
+  z-index: 2;
   position: relative;
 }
 
-.nav-tab:hover {
-  color: #cbd5e1;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 0.5rem 0.5rem 0 0;
+/* Custom timeline SVG style */
+.svg-chart {
+  background: rgba(15, 19, 26, 0.4);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 12px;
 }
 
-.nav-tab.active {
-  color: #f8fafc;
-  border-bottom-color: var(--color-neon-primary);
-  background: linear-gradient(to top, rgba(14, 165, 233, 0.1), transparent);
-  border-radius: 0.5rem 0.5rem 0 0;
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
 }
 
-.nav-tab.active svg {
-  color: var(--color-neon-primary);
-  filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
+.metrics-table th, .metrics-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Animations */
-.fade-in-up {
-  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.metrics-table th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.metrics-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.01);
 }
 
-/* Recharts Overrides */
-.recharts-tooltip-cursor {
-  fill: rgba(255, 255, 255, 0.03) !important;
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-/* Terminal Box */
-.terminal-box {
-  background-color: rgba(0, 0, 0, 0.4);
-  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(31, 41, 55, 0.8);
-  color: #94a3b8;
-  overflow-y: auto;
-  max-height: 350px;
+.badge-benign {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--color-green);
 }
 
-/* Stat Card */
-.stat-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  background: linear-gradient(145deg, rgba(17,24,39,0.8), rgba(3,7,18,0.9));
-  border: 1px solid rgba(31,41,55,1);
-  border-radius: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-.stat-card-icon {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  opacity: 0.2;
+.badge-malicious {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--color-red);
 }
 
-/* Scrollbar */
+/* Custom Select Dropdown */
+.custom-select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.custom-select:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Scrollbar customization */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
+
 ::-webkit-scrollbar-track {
-  background: rgba(3, 7, 18, 0.5);
+  background: rgba(0, 0, 0, 0.1);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Row Hover Transition */
+.ranking-row:hover {
+  background: rgba(255, 255, 255, 0.025) !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
